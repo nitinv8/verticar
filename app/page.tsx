@@ -171,7 +171,7 @@ export default function Home() {
                 title: "Ride with people you trust",
                 desc: "Same driver, same car, same neighbours. It feels like a carpool among friends — not a random shared ride.",
               },
-            ].map((item, i) => (
+            ].map((item) => (
               <div key={item.step} className="relative flex flex-col gap-4 items-center text-center sm:items-start sm:text-left">
                 <div
                   className="w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold shrink-0 z-10"
