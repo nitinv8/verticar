@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VertiCar — Investor Pitch Deck</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #d4a843;
+    --gold-light: #f0c96a;
+    --gold-dim: rgba(212,168,67,0.15);
+    --gold-border: rgba(212,168,67,0.25);
+    --bg-dark: #0a0f1e;
+    --bg-card: #111827;
+    --bg-mid: #0d1220;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-faint: #475569;
+    --border: rgba(255,255,255,0.06);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── SLIDE SYSTEM ── */
+  .slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    page-break-after: always;
+  }
+
+  .slide-number {
+    position: absolute;
+    bottom: 28px;
+    right: 40px;
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+  }
+
+  .slide-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    color: var(--gold);
+    margin-bottom: 20px;
+    width: fit-content;
+  }
+
+  h1 { font-size: 52px; font-weight: 700; line-height: 1.15; }
+  h2 { font-size: 38px; font-weight: 700; line-height: 1.2; }
+  h3 { font-size: 22px; font-weight: 600; }
+  h4 { font-size: 16px; font-weight: 600; }
+
+  .gold { color: var(--gold); }
+  .muted { color: var(--text-muted); }
+  .faint { color: var(--text-faint); }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+
+  .card-gold {
+    background: var(--bg-card);
+    border: 1px solid var(--gold-border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+  .glow-bg {
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse at center, rgba(212,168,67,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .stat-big {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--gold-dim);
+    color: var(--gold);
+    border: 1px solid var(--gold-border);
+  }
+
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin: 20px 0;
+  }
+
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .check-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--text-muted); }
+  .check-list li::before { content: "✓"; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── SLIDE 1: COVER ── */
+  #s1 { background: var(--bg-dark); text-align: center; align-items: center; }
+  #s1 .logo { font-size: 64px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+  #s1 .logo span.v { color: var(--gold); }
+  #s1 .tagline { font-size: 22px; color: var(--text-muted); max-width: 520px; margin: 0 auto 40px; }
+  #s1 .meta { display: flex; gap: 32px; justify-content: center; }
+  #s1 .meta-item { text-align: center; }
+  #s1 .meta-item .val { font-size: 28px; font-weight: 700; color: var(--gold); }
+  #s1 .meta-item .lbl { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+
+  /* ── SLIDE 2: PROBLEM ── */
+  #s2 { background: var(--bg-mid); }
+
+  /* ── SLIDE 3: SOLUTION ── */
+  #s3 { background: var(--bg-dark); }
+
+  /* ── SLIDE 4: HOW IT WORKS ── */
+  #s4 { background: var(--bg-mid); }
+
+  /* ── SLIDE 5: MARKET ── */
+  #s5 { background: var(--bg-dark); }
+
+  /* ── SLIDE 6: BUSINESS MODEL ── */
+  #s6 { background: var(--bg-mid); }
+
+  /* ── SLIDE 7: UNIT ECONOMICS ── */
+  #s7 { background: var(--bg-dark); }
+
+  /* ── SLIDE 8: GTM ── */
+  #s8 { background: var(--bg-mid); }
+
+  /* ── SLIDE 9: WHY NOW ── */
+  #s9 { background: var(--bg-dark); }
+
+  /* ── SLIDE 10: TRACTION ── */
+  #s10 { background: var(--bg-mid); }
+
+  /* ── SLIDE 11: TEAM ── */
+  #s11 { background: var(--bg-dark); }
+
+  /* ── SLIDE 12: USE OF FUNDS ── */
+  #s12 { background: var(--bg-mid); }
+
+  /* ── SLIDE 13: THE ASK ── */
+  #s13 { background: var(--bg-dark); text-align: center; align-items: center; }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: rgba(255,255,255,0.05);
+    z-index: 100;
+    display: none;
+  }
+
+  /* funnel */
+  .funnel-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .funnel-label { font-size: 13px; color: var(--text-muted); width: 180px; flex-shrink: 0; }
+  .funnel-bar-wrap { flex: 1; height: 32px; background: rgba(255,255,255,0.04); border-radius: 6px; overflow: hidden; }
+  .funnel-bar { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; }
+  .funnel-bar span { font-size: 12px; font-weight: 700; color: var(--bg-dark); }
+
+  /* timeline */
+  .timeline { display: flex; gap: 0; position: relative; margin-top: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .tl-item { flex: 1; padding-top: 44px; padding-right: 20px; position: relative; }
+  .tl-dot {
+    position: absolute;
+    top: 12px; left: 0;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 3px solid var(--bg-dark);
+  }
+  .tl-phase { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .tl-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .tl-desc { font-size: 12px; color: var(--text-faint); line-height: 1.5; }
+
+  @media print {
+    .slide { page-break-after: always; min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — COVER
+══════════════════════════════════════════ -->
+<section class="slide" id="s1">
+  <div class="glow-bg"></div>
+  <div class="logo"><span class="v">Verti</span>Car</div>
+  <div class="tagline">Community mobility for premium societies.<br>Your car. Your driver. Your neighbours.</div>
+  <div class="meta">
+    <div class="meta-item">
+      <div class="val">₹5–10 Cr</div>
+      <div class="lbl">Pre-Seed Ask</div>
+    </div>
+    <div class="meta-item" style="width:1px;background:rgba(255,255,255,0.1);"></div>
+    <div class="meta-item">
+      <div class="val">Gurgaon → India</div>
+      <div class="lbl">Launch Market</div>
+    </div>
+    <div class="meta-item" style="width:1px;background:rgba(255,255,255,0.1);"></div>
+    <div class="meta-item">
+      <div class="val">2026</div>
+      <div class="lbl">Founding Year</div>
+    </div>
+  </div>
+  <div class="slide-number">1 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — THE PROBLEM
+══════════════════════════════════════════ -->
+<section class="slide" id="s2">
+  <div class="slide-tag">🔴 The Problem</div>
+  <h2>Urban mobility is <span class="gold">broken</span> for families.</h2>
+  <div class="divider"></div>
+  <p class="muted" style="font-size:17px;max-width:620px;margin-bottom:36px;">
+    India's 2.8 crore premium society households are trapped between unreliable app cabs and the full cost of car ownership. There is no middle ground — yet.
+  </p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div style="font-size:32px;margin-bottom:14px;">🚫</div>
+      <h4 style="margin-bottom:8px;">Unreliable cabs</h4>
+      <p class="muted" style="font-size:14px;">Surge at 8am. Cancellations at school gates. A stranger every single ride. Uber & Ola optimise for driver utilisation — not family safety.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:32px;margin-bottom:14px;">👤</div>
+      <h4 style="margin-bottom:8px;">Zero trust</h4>
+      <p class="muted" style="font-size:14px;">You don't know who's driving your children. Background checks are opaque. There is no accountability beyond a 1-star rating that goes nowhere.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:32px;margin-bottom:14px;">💸</div>
+      <h4 style="margin-bottom:8px;">₹12,000–18,000/month wasted</h4>
+      <p class="muted" style="font-size:14px;">Daily rides, surge multipliers, convenience fees. A 2-income family in Gurgaon easily spends ₹15,000/month on cabs for a premium commodity experience.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px;border-color:rgba(212,168,67,0.2);display:flex;align-items:center;gap:24px;padding:20px 28px;">
+    <span style="font-size:28px;">💡</span>
+    <p style="font-size:15px;color:var(--text);">The people most underserved are not the mass market — they're <strong>premium families</strong> who can pay for better but have nowhere good to go.</p>
+  </div>
+  <div class="slide-number">2 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — THE SOLUTION
+══════════════════════════════════════════ -->
+<section class="slide" id="s3">
+  <div class="glow-bg"></div>
+  <div class="slide-tag">✅ The Solution</div>
+  <h2>A shared car + dedicated driver,<br><span class="gold">curated for your society.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:28px;align-items:start;">
+    <div>
+      <p class="muted" style="font-size:17px;margin-bottom:24px;">
+        VertiCar assigns a vetted car and driver to a specific gated community. Families in that society share the asset — paying a flat monthly membership — and book rides via WhatsApp. No app. No surge. Same faces every day.
+      </p>
+      <ul class="check-list">
+        <li>One driver permanently assigned to your society</li>
+        <li>Background verified, community-known, family-trusted</li>
+        <li>Flat monthly membership — no surge, ever</li>
+        <li>Book via WhatsApp in seconds — no app to download</li>
+        <li>One membership covers the whole family</li>
+        <li>Office, school, clinic, airport — all covered</li>
+      </ul>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card-gold" style="text-align:center;padding:32px;">
+        <div class="stat-big">₹3,500</div>
+        <div class="stat-label">Base membership / month<br><span class="faint">(+ per-ride top-ups)</span></div>
+      </div>
+      <div class="grid-2" style="gap:12px;">
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:28px;margin-bottom:8px;">🛡️</div>
+          <div style="font-size:13px;font-weight:600;">Trust-first</div>
+          <div style="font-size:12px;color:var(--text-faint);margin-top:4px;">Community-vetted drivers</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:28px;margin-bottom:8px;">📱</div>
+          <div style="font-size:13px;font-weight:600;">WhatsApp-native</div>
+          <div style="font-size:12px;color:var(--text-faint);margin-top:4px;">Zero app friction</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:28px;margin-bottom:8px;">📉</div>
+          <div style="font-size:13px;font-weight:600;">Save 40%</div>
+          <div style="font-size:12px;color:var(--text-faint);margin-top:4px;">vs daily cab spend</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div style="font-size:28px;margin-bottom:8px;">👨‍👩‍👧‍👦</div>
+          <div style="font-size:13px;font-weight:600;">Multigenerational</div>
+          <div style="font-size:12px;color:var(--text-faint);margin-top:4px;">Covers entire family</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">3 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 — HOW IT WORKS
+══════════════════════════════════════════ -->
+<section class="slide" id="s4">
+  <div class="slide-tag">⚙️ How It Works</div>
+  <h2>Three steps. <span class="gold">Zero friction.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-3" style="margin-top:8px;">
+    <div class="card-gold" style="position:relative;padding-top:36px;">
+      <div style="position:absolute;top:-20px;left:28px;width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--bg-dark);">1</div>
+      <h4 style="margin-bottom:10px;">Society Onboards</h4>
+      <p class="muted" style="font-size:14px;">VertiCar signs up an RWA or a critical mass of 10+ families in a society. We assign a curated car + vetted driver exclusively to that community. The driver attends the RWA meeting — everyone meets face to face.</p>
+    </div>
+    <div class="card-gold" style="position:relative;padding-top:36px;">
+      <div style="position:absolute;top:-20px;left:28px;width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--bg-dark);">2</div>
+      <h4 style="margin-bottom:10px;">Families Subscribe</h4>
+      <p class="muted" style="font-size:14px;">Each family pays a flat monthly membership. The shared cost makes it significantly cheaper than daily cabs. A WhatsApp group is set up. Rides are booked by message — AI scheduling handles coordination.</p>
+    </div>
+    <div class="card-gold" style="position:relative;padding-top:36px;">
+      <div style="position:absolute;top:-20px;left:28px;width:44px;height:44px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--bg-dark);">3</div>
+      <h4 style="margin-bottom:10px;">Community Rides</h4>
+      <p class="muted" style="font-size:14px;">Same driver, same car, same faces. School runs in the morning. Office commutes. Evening returns. Grandparent clinic visits. The driver becomes part of the community fabric — trusted like building staff.</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:24px;gap:16px;">
+    <div class="card" style="display:flex;align-items:center;gap:16px;">
+      <span style="font-size:28px;">🤖</span>
+      <div>
+        <h4 style="margin-bottom:4px;">AI-powered WhatsApp scheduling</h4>
+        <p class="faint" style="font-size:13px;">Route optimisation, ride batching, and schedule conflicts handled automatically — no ops overhead per ride.</p>
+      </div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:16px;">
+      <span style="font-size:28px;">🏘️</span>
+      <div>
+        <h4 style="margin-bottom:4px;">RWA partnership model</h4>
+        <p class="faint" style="font-size:13px;">Work with Resident Welfare Associations as channel partners. One deal unlocks 200–500 potential member families instantly.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">4 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 — MARKET OPPORTUNITY
+══════════════════════════════════════════ -->
+<section class="slide" id="s5">
+  <div class="slide-tag">📊 Market Opportunity</div>
+  <h2>A <span class="gold">₹9,000 crore</span> addressable market.<br>Completely underserved.</h2>
+  <div class="divider"></div>
+
+  <div class="grid-3" style="margin-bottom:28px;">
+    <div class="card-gold" style="text-align:center;">
+      <div class="stat-big">₹9,200 Cr</div>
+      <div class="stat-label">TAM — India's premium gated community mobility market (15,000+ societies × ₹5,500 ARPU × 12)</div>
+    </div>
+    <div class="card-gold" style="text-align:center;">
+      <div class="stat-big">₹2,400 Cr</div>
+      <div class="stat-label">SAM — Top 4 metros: NCR, Mumbai, Bengaluru, Hyderabad (4,000 premium societies)</div>
+    </div>
+    <div class="card-gold" style="text-align:center;">
+      <div class="stat-big">₹180 Cr</div>
+      <div class="stat-label">SOM — Year 3 target: 500 societies across NCR + Bengaluru at scale</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="gap:20px;">
+    <div>
+      <h4 style="margin-bottom:16px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">Market Funnel — NCR alone</h4>
+      <div class="funnel-row">
+        <div class="funnel-label">Premium societies in NCR</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%"><span>~2,200</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Serviceable (Year 1–3)</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:55%"><span>~1,200</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Realistic penetration</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:18%"><span>200</span></div></div>
+      </div>
+      <div class="funnel-row">
+        <div class="funnel-label">Families subscribed</div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:10%"><span>40,000</span></div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center;">
+      <div class="card" style="padding:18px 24px;">
+        <div style="font-size:13px;color:var(--text-faint);margin-bottom:4px;">Why premium societies?</div>
+        <p style="font-size:14px;color:var(--text-muted);">High disposable income. Dense geography. Existing trust networks. Ready-made community structures (RWAs). And families who actively <em>want</em> predictability over price.</p>
+      </div>
+      <div class="card" style="padding:18px 24px;">
+        <div style="font-size:13px;color:var(--text-faint);margin-bottom:4px;">No direct competitor</div>
+        <p style="font-size:14px;color:var(--text-muted);">Uber/Ola don't serve this niche. Private chauffeur services don't scale. Traditional carpools have no business model. <strong style="color:var(--text);">This category doesn't exist yet.</strong></p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">5 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 — BUSINESS MODEL
+══════════════════════════════════════════ -->
+<section class="slide" id="s6">
+  <div class="slide-tag">💰 Business Model</div>
+  <h2>Recurring revenue. <span class="gold">Multiple streams.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-3" style="margin-bottom:24px;">
+    <div class="card-gold" style="border-top:3px solid var(--gold);">
+      <div style="font-size:24px;margin-bottom:12px;">🔄</div>
+      <h4 style="margin-bottom:8px;">Monthly Membership</h4>
+      <div style="font-size:28px;font-weight:800;color:var(--gold);margin-bottom:6px;">₹3,500+</div>
+      <p class="muted" style="font-size:13px;">Base plan per family/month. Predictable, recurring. Billed monthly or quarterly. This alone covers fixed costs per car once 8–10 families subscribe.</p>
+    </div>
+    <div class="card-gold" style="border-top:3px solid rgba(212,168,67,0.5);">
+      <div style="font-size:24px;margin-bottom:12px;">🚗</div>
+      <h4 style="margin-bottom:8px;">Per-Ride Top-Ups</h4>
+      <div style="font-size:28px;font-weight:800;color:var(--gold);margin-bottom:6px;">₹80–150/ride</div>
+      <p class="muted" style="font-size:13px;">Rides beyond the base plan, airport transfers, inter-society rides, late-night runs. Adds ₹1,500–3,000/month per active family in overage.</p>
+    </div>
+    <div class="card-gold" style="border-top:3px solid rgba(212,168,67,0.3);">
+      <div style="font-size:24px;margin-bottom:12px;">🤝</div>
+      <h4 style="margin-bottom:8px;">B2B Society Plans</h4>
+      <div style="font-size:28px;font-weight:800;color:var(--gold);margin-bottom:6px;">₹80K–1.5L/mo</div>
+      <p class="muted" style="font-size:13px;">Enterprise deals with developers (DLF, Godrej, Sobha) as a premium amenity for new projects. Higher margin, zero CAC per family.</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="gap:20px;">
+    <div class="card" style="padding:24px 28px;">
+      <h4 style="margin-bottom:14px;">Revenue per car (steady state)</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          <span class="muted">10 families × ₹3,500 base</span><span style="color:var(--text);">₹35,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          <span class="muted">Per-ride top-ups (~₹1,800/family)</span><span style="color:var(--text);">₹18,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;">
+          <span>Total Revenue / Car</span><span class="gold">₹53,000</span>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="padding:24px 28px;">
+      <h4 style="margin-bottom:14px;">Cost per car (steady state)</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          <span class="muted">Driver salary + incentives</span><span style="color:var(--text);">₹25,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          <span class="muted">Car lease (compact SUV)</span><span style="color:var(--text);">₹18,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          <span class="muted">Fuel, maintenance, insurance</span><span style="color:var(--text);">₹9,000</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;">
+          <span>Gross Profit / Car</span><span class="gold">₹1,000 → ₹12,000+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">6 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7 — UNIT ECONOMICS
+══════════════════════════════════════════ -->
+<section class="slide" id="s7">
+  <div class="slide-tag">📐 Unit Economics</div>
+  <h2>Strong economics at <span class="gold">society scale.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:24px;margin-bottom:24px;">
+    <div>
+      <h4 style="margin-bottom:16px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">Per-Society P&amp;L (100 families, 8 cars)</h4>
+      <div class="card" style="padding:24px;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+            <span class="muted">Membership revenue (60 subscribers)</span><span>₹2,10,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+            <span class="muted">Per-ride top-ups</span><span>₹1,08,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;padding-bottom:10px;border-bottom:1px solid rgba(212,168,67,0.2);">
+            <span class="gold">Gross Revenue</span><span class="gold">₹3,18,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+            <span class="muted">Driver costs (8 × ₹25K)</span><span>₹2,00,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+            <span class="muted">Car lease (8 × ₹18K)</span><span>₹1,44,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">
+            <span class="muted">Fuel + ops (8 × ₹9K)</span><span>₹72,000</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:800;">
+            <span>Society Gross Profit</span><span class="gold">₹(98,000) → break-even at 55 subs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card-gold" style="text-align:center;padding:28px;">
+        <div class="stat-big">~55</div>
+        <div class="stat-label">Subscribers needed per society to break even<br><span class="faint">(out of 100–500 families)</span></div>
+      </div>
+      <div class="grid-2" style="gap:12px;">
+        <div class="card" style="text-align:center;padding:20px;">
+          <div class="stat-big" style="font-size:28px;">18–24 mo</div>
+          <div class="stat-label" style="font-size:12px;">Payback period per society</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div class="stat-big" style="font-size:28px;">₹4,800</div>
+          <div class="stat-label" style="font-size:12px;">ARPU/month (members at steady state)</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div class="stat-big" style="font-size:28px;">&lt;₹800</div>
+          <div class="stat-label" style="font-size:12px;">CAC per family (RWA channel)</div>
+        </div>
+        <div class="card" style="text-align:center;padding:20px;">
+          <div class="stat-big" style="font-size:28px;">&gt;36 mo</div>
+          <div class="stat-label" style="font-size:12px;">LTV horizon (high stickiness)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="padding:18px 24px;border-color:rgba(212,168,67,0.2);display:flex;gap:16px;align-items:center;">
+    <span style="font-size:24px;">📌</span>
+    <p style="font-size:14px;color:var(--text-muted);">Unit economics improve dramatically at 100+ societies due to shared ops overhead, driver network density, and bulk car leasing rates. The model is designed to become highly profitable at NCR scale.</p>
+  </div>
+  <div class="slide-number">7 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8 — GO TO MARKET
+══════════════════════════════════════════ -->
+<section class="slide" id="s8">
+  <div class="slide-tag">🚀 Go-To-Market</div>
+  <h2>Society by society. <span class="gold">City by city.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:24px;margin-bottom:24px;">
+    <div>
+      <h4 style="margin-bottom:16px;">Primary channel: RWA partnerships</h4>
+      <ul class="check-list" style="margin-bottom:20px;">
+        <li>Partner directly with Resident Welfare Associations</li>
+        <li>One RWA deal = 200–500 warm leads instantly</li>
+        <li>RWA endorsement = community trust signal (zero cold outreach)</li>
+        <li>Offer RWA a revenue share or a free car for common areas</li>
+        <li>Pilot in DLF Phase 5 → expand to DLF 1–6, Sushant Lok, Sector 56</li>
+      </ul>
+      <h4 style="margin-bottom:12px;">Secondary channels</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="card" style="padding:12px 16px;display:flex;gap:12px;align-items:center;">
+          <span style="font-size:18px;">🏗️</span>
+          <div><strong style="font-size:13px;">Developer partnerships</strong> <span class="faint" style="font-size:12px;">— DLF, Godrej, Sobha, Prestige include VertiCar as an amenity in new launches</span></div>
+        </div>
+        <div class="card" style="padding:12px 16px;display:flex;gap:12px;align-items:center;">
+          <span style="font-size:18px;">📣</span>
+          <div><strong style="font-size:13px;">Resident word-of-mouth</strong> <span class="faint" style="font-size:12px;">— One happy family in a society sells to 10 neighbours organically</span></div>
+        </div>
+        <div class="card" style="padding:12px 16px;display:flex;gap:12px;align-items:center;">
+          <span style="font-size:18px;">🌐</span>
+          <div><strong style="font-size:13px;">Society apps</strong> <span class="faint" style="font-size:12px;">— MyGate, NoBrokerHood integrations reach 1M+ gated community residents</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h4 style="margin-bottom:8px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">Expansion Roadmap</h4>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Phase 1 · 0–6 mo</div>
+          <div class="tl-title">Pilot: DLF Phase 5</div>
+          <div class="tl-desc">3–5 societies, 50–80 families. Prove unit economics. Build ops playbook. Hire 5 drivers.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Phase 2 · 6–18 mo</div>
+          <div class="tl-title">Gurgaon Scale</div>
+          <div class="tl-desc">30 societies across DLF, Sushant Lok, Sector 56, 65, 82. Launch WhatsApp AI scheduler. 300+ cars on road.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Phase 3 · 18–36 mo</div>
+          <div class="tl-title">Metro Expansion</div>
+          <div class="tl-desc">Delhi, Noida → Bengaluru → Mumbai. Developer partnerships. 1,500+ societies targeted.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Phase 4 · 36 mo+</div>
+          <div class="tl-title">Platform Play</div>
+          <div class="tl-desc">VertiCar OS for societies: mobility + concierge + logistics. Data moat. International expansion.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">8 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 9 — WHY NOW
+══════════════════════════════════════════ -->
+<section class="slide" id="s9">
+  <div class="glow-bg"></div>
+  <div class="slide-tag">⏰ Why Now</div>
+  <h2>Four tailwinds. <span class="gold">One perfect window.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:20px;">
+    <div class="card-gold" style="display:flex;gap:20px;align-items:flex-start;">
+      <div style="font-size:36px;flex-shrink:0;margin-top:4px;">📱</div>
+      <div>
+        <h4 style="margin-bottom:8px;">WhatsApp is the new OS</h4>
+        <p class="muted" style="font-size:14px;">500M Indians on WhatsApp. AI agents now handle booking, coordination, and payments natively. VertiCar can operate with zero proprietary app — reducing CAC and onboarding friction to near-zero.</p>
+      </div>
+    </div>
+    <div class="card-gold" style="display:flex;gap:20px;align-items:flex-start;">
+      <div style="font-size:36px;flex-shrink:0;margin-top:4px;">🏘️</div>
+      <div>
+        <h4 style="margin-bottom:8px;">Premium housing boom</h4>
+        <p class="muted" style="font-size:14px;">India added 1.2 lakh premium housing units in 2024 alone. NCR, Bengaluru, and Mumbai are seeing record sales in the ₹1–5 crore segment — exactly VertiCar's target customer base.</p>
+      </div>
+    </div>
+    <div class="card-gold" style="display:flex;gap:20px;align-items:flex-start;">
+      <div style="font-size:36px;flex-shrink:0;margin-top:4px;">😤</div>
+      <div>
+        <h4 style="margin-bottom:8px;">Cab platform fatigue is real</h4>
+        <p class="muted" style="font-size:14px;">Uber and Ola cancellation rates, surge pricing, and driver quality degradation have hit all-time sentiment lows. Premium customers are actively looking for alternatives — the timing is ripe for a trust-first product.</p>
+      </div>
+    </div>
+    <div class="card-gold" style="display:flex;gap:20px;align-items:flex-start;">
+      <div style="font-size:36px;flex-shrink:0;margin-top:4px;">🚗</div>
+      <div>
+        <h4 style="margin-bottom:8px;">EV fleet economics unlocked</h4>
+        <p class="muted" style="font-size:14px;">CNG + EV leasing costs have dropped 30% in 3 years. Fleet operators can now deliver a premium, comfortable car at ₹15,000–18,000/month lease — making per-car economics work at 8–10 families.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px;border-color:rgba(212,168,67,0.2);display:flex;align-items:center;gap:20px;padding:18px 28px;">
+    <span style="font-size:24px;">🎯</span>
+    <p style="font-size:15px;color:var(--text);">The convergence of AI scheduling, WhatsApp-native UX, premium housing growth, and EV fleet affordability makes 2025–2026 the <strong style="color:var(--gold);">only window</strong> to build this category before incumbents notice it.</p>
+  </div>
+  <div class="slide-number">9 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 10 — TRACTION
+══════════════════════════════════════════ -->
+<section class="slide" id="s10">
+  <div class="slide-tag">📈 Traction</div>
+  <h2>Early days. <span class="gold">Strong signal.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:28px;">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card-gold" style="display:flex;gap:20px;align-items:center;padding:24px;">
+        <div style="font-size:40px;font-weight:800;color:var(--gold);flex-shrink:0;">01</div>
+        <div>
+          <h4 style="margin-bottom:4px;">Live landing page + waitlist</h4>
+          <p class="muted" style="font-size:13px;">Launched verticar.vercel.app — collecting early sign-ups from DLF Phase 5, Gurgaon. Organic shares happening in society WhatsApp groups already.</p>
+        </div>
+      </div>
+      <div class="card-gold" style="display:flex;gap:20px;align-items:center;padding:24px;">
+        <div style="font-size:40px;font-weight:800;color:var(--gold);flex-shrink:0;">02</div>
+        <div>
+          <h4 style="margin-bottom:4px;">Concept validated with residents</h4>
+          <p class="muted" style="font-size:13px;">Direct conversations with DLF Phase 5 families show strong intent to switch. Pain points (surge, cancellations, trust) confirmed as top-of-mind.</p>
+        </div>
+      </div>
+      <div class="card-gold" style="display:flex;gap:20px;align-items:center;padding:24px;">
+        <div style="font-size:40px;font-weight:800;color:var(--gold);flex-shrink:0;">03</div>
+        <div>
+          <h4 style="margin-bottom:4px;">Driver supply pipeline identified</h4>
+          <p class="muted" style="font-size:13px;">Existing chauffeur networks in NCR have 100s of quality drivers looking for stable, predictable income vs. gig uncertainty. Driver supply is not a constraint.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4 style="margin-bottom:16px;color:var(--text-muted);font-size:13px;text-transform:uppercase;letter-spacing:0.08em;">12-Month Milestones (post-funding)</h4>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;"></div>
+          <div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:3px;">Month 1–2: Pilot launch</div>
+            <div class="faint" style="font-size:13px;">3 societies in DLF Ph5, 30–50 member families, 5 cars, 5 drivers on road</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;"></div>
+          <div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:3px;">Month 3–5: Product + ops</div>
+            <div class="faint" style="font-size:13px;">WhatsApp AI scheduling live, driver management app, NPS measurement, refine pricing</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;"></div>
+          <div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:3px;">Month 6–8: Gurgaon expansion</div>
+            <div class="faint" style="font-size:13px;">15 societies, 200+ cars, ₹80L+ MRR run rate, first RWA master partnership signed</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px;"></div>
+          <div>
+            <div style="font-size:14px;font-weight:600;margin-bottom:3px;">Month 10–12: Series A prep</div>
+            <div class="faint" style="font-size:13px;">30 societies, 500 cars, ₹1.5 Cr MRR, clear path to unit economics, raise Series A</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">10 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 11 — TEAM
+══════════════════════════════════════════ -->
+<section class="slide" id="s11">
+  <div class="glow-bg"></div>
+  <div class="slide-tag">👥 Team</div>
+  <h2>Built to <span class="gold">execute.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:24px;margin-bottom:24px;">
+    <div class="card-gold" style="padding:32px;">
+      <div style="width:60px;height:60px;border-radius:50%;background:var(--gold-dim);border:2px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;">N</div>
+      <h3 style="margin-bottom:4px;">Nitin Verma</h3>
+      <div class="pill" style="margin-bottom:14px;">Founder & CEO</div>
+      <ul class="check-list" style="font-size:14px;">
+        <li>Serial founder — Spans Envirotech, Xestu</li>
+        <li>Deep experience in B2B sales, product, and ops</li>
+        <li>Strong network in premium housing communities in NCR</li>
+        <li>Hands-on operator — ships fast, builds lean</li>
+      </ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--bg-mid);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">?</div>
+        <div>
+          <h4 style="margin-bottom:3px;">Head of Operations</h4>
+          <div class="faint" style="font-size:13px;">Hiring — logistics/fleet ops background, Gurgaon-based. Key to driver network and society onboarding.</div>
+        </div>
+      </div>
+      <div class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--bg-mid);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">?</div>
+        <div>
+          <h4 style="margin-bottom:3px;">Tech Lead (WhatsApp AI)</h4>
+          <div class="faint" style="font-size:13px;">Hiring — WhatsApp Business API + scheduling platform. Core product that enables zero-ops-overhead booking.</div>
+        </div>
+      </div>
+      <div class="card" style="padding:20px 24px;display:flex;gap:16px;align-items:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--bg-mid);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">?</div>
+        <div>
+          <h4 style="margin-bottom:3px;">Community Sales Lead</h4>
+          <div class="faint" style="font-size:13px;">Hiring — RWA relationships in NCR. Responsible for society onboarding and membership conversion.</div>
+        </div>
+      </div>
+      <div class="card" style="padding:14px 20px;background:var(--gold-dim);border-color:var(--gold-border);font-size:13px;color:var(--text-muted);">
+        💼 <strong style="color:var(--text);">Advisors sought:</strong> ex-Ola/Uber ops, gated community developers, fleet leasing veterans
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">11 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 12 — USE OF FUNDS
+══════════════════════════════════════════ -->
+<section class="slide" id="s12">
+  <div class="slide-tag">🏦 Use of Funds</div>
+  <h2>₹7.5 Cr to prove <span class="gold">the model.</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="gap:28px;align-items:start;">
+    <div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div class="funnel-row" style="margin-bottom:6px;">
+            <div class="funnel-label" style="font-size:14px;color:var(--text);width:220px;">🚗 Fleet & Operations</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:33%;justify-content:flex-end;"><span>₹2.5 Cr · 33%</span></div></div>
+          </div>
+          <p class="faint" style="font-size:12px;padding-left:0;margin-top:2px;">Car lease deposits, fuel float, driver onboarding + training, safety equipment (dashcams, GPS)</p>
+        </div>
+        <div>
+          <div class="funnel-row" style="margin-bottom:6px;">
+            <div class="funnel-label" style="font-size:14px;color:var(--text);width:220px;">👥 Team</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:27%;"><span>₹2.0 Cr · 27%</span></div></div>
+          </div>
+          <p class="faint" style="font-size:12px;margin-top:2px;">Ops head, tech lead, community sales, 2 city ops managers</p>
+        </div>
+        <div>
+          <div class="funnel-row" style="margin-bottom:6px;">
+            <div class="funnel-label" style="font-size:14px;color:var(--text);width:220px;">💻 Tech Platform</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:20%;"><span>₹1.5 Cr · 20%</span></div></div>
+          </div>
+          <p class="faint" style="font-size:12px;margin-top:2px;">WhatsApp AI scheduler, driver app, ops dashboard, payments integration</p>
+        </div>
+        <div>
+          <div class="funnel-row" style="margin-bottom:6px;">
+            <div class="funnel-label" style="font-size:14px;color:var(--text);width:220px;">📢 Community Acquisition</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:13%;"><span>₹1.0 Cr · 13%</span></div></div>
+          </div>
+          <p class="faint" style="font-size:12px;margin-top:2px;">RWA outreach, society events, referral program, MyGate/NoBrokerHood integrations</p>
+        </div>
+        <div>
+          <div class="funnel-row" style="margin-bottom:6px;">
+            <div class="funnel-label" style="font-size:14px;color:var(--text);width:220px;">🔄 Working Capital</div>
+            <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:7%;"><span>₹0.5 Cr · 7%</span></div></div>
+          </div>
+          <p class="faint" style="font-size:12px;margin-top:2px;">Buffer for ops gaps, float, unexpected costs</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card-gold" style="padding:28px;">
+        <h4 style="margin-bottom:16px;">What this buys</h4>
+        <ul class="check-list">
+          <li>30 societies live in Gurgaon by month 12</li>
+          <li>500+ cars on road, 5,000+ member families</li>
+          <li>₹1.5 Cr MRR run rate at Series A</li>
+          <li>Full-stack WhatsApp AI scheduling deployed</li>
+          <li>Ops playbook ready to replicate in Bengaluru + Delhi</li>
+          <li>NPS &gt;60 and unit economics proven</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:20px;border-color:rgba(212,168,67,0.2);">
+        <div style="font-size:13px;color:var(--text-faint);margin-bottom:6px;">Raise structure</div>
+        <div style="font-size:15px;color:var(--text);">₹5–10 Cr · Pre-Seed · SAFE or convertible note at a reasonable cap. Target close: Q2 2026.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">12 / 13</div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SLIDE 13 — THE ASK
+══════════════════════════════════════════ -->
+<section class="slide" id="s13">
+  <div class="glow-bg"></div>
+  <div style="text-align:center;max-width:640px;">
+    <div class="slide-tag" style="margin:0 auto 24px;">🎯 The Ask</div>
+    <h2 style="font-size:44px;margin-bottom:16px;">We're raising <span class="gold">₹5–10 crore</span><br>to redefine how premium India moves.</h2>
+    <p class="muted" style="font-size:17px;margin-bottom:40px;line-height:1.7;">
+      The opportunity is real. The timing is right. The market is waiting.<br>
+      Help us build the community mobility layer for India's 15,000 premium societies.
+    </p>
+
+    <div class="grid-3" style="margin-bottom:36px;text-align:center;">
+      <div class="card-gold" style="padding:24px;">
+        <div class="stat-big" style="font-size:32px;">₹9,200 Cr</div>
+        <div class="stat-label">Addressable market</div>
+      </div>
+      <div class="card-gold" style="padding:24px;">
+        <div class="stat-big" style="font-size:32px;">₹1.5 Cr</div>
+        <div class="stat-label">MRR target at Series A</div>
+      </div>
+      <div class="card-gold" style="padding:24px;">
+        <div class="stat-big" style="font-size:32px;">30</div>
+        <div class="stat-label">Societies live in 12 months</div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:24px 32px;border-color:rgba(212,168,67,0.25);text-align:left;margin-bottom:24px;">
+      <div style="font-size:13px;color:var(--text-faint);margin-bottom:8px;">Get in touch</div>
+      <div style="font-size:16px;color:var(--text);">Nitin Verma · Founder, VertiCar</div>
+      <div style="font-size:15px;color:var(--gold);margin-top:4px;">verticar.vercel.app · nitinv8@gmail.com</div>
+    </div>
+
+    <p class="faint" style="font-size:12px;">This presentation contains forward-looking statements and projections. Actual results may vary.</p>
+  </div>
+  <div class="slide-number">13 / 13</div>
+</section>
+
+</body>
+</html>
