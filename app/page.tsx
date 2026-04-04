@@ -264,44 +264,60 @@ export default function Home() {
               style={{ background: "radial-gradient(ellipse at top center, #d4a843, transparent 60%)" }}
             />
             <div className="relative">
-              <div className="flex flex-col items-center justify-center mb-6">
+              {/* Price block */}
+              <div className="flex flex-col items-center justify-center mb-4">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-xl font-medium line-through" style={{ color: "#64748b" }}>₹5,000</span>
                   <div className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide" style={{ backgroundColor: "rgba(212,168,67,0.15)", color: "#d4a843", border: "1px solid rgba(212,168,67,0.3)" }}>
-                    3 Months Pre-launch Offer
+                    Founding Member Rate
                   </div>
                 </div>
                 <div className="text-5xl sm:text-6xl font-bold" style={{ color: "#d4a843" }}>
                   ₹3,333
                   <span className="text-2xl font-medium text-white">/month</span>
                 </div>
+                <p className="mt-2 text-sm font-medium" style={{ color: "#f59e0b" }}>
+                  🔒 Locked in for first 3 months · Limited spots per society
+                </p>
               </div>
-              <p className="text-base mb-8" style={{ color: "#94a3b8" }}>
-                Base membership. Pay per ride beyond your plan.
-              </p>
 
+              {/* Trip breakdown */}
+              <div className="rounded-2xl p-5 mb-8 text-left" style={{ backgroundColor: "rgba(212,168,67,0.06)", border: "1px solid rgba(212,168,67,0.15)" }}>
+                <p className="text-sm font-semibold mb-3" style={{ color: "#d4a843" }}>What&apos;s included — 10 trips/month</p>
+                <div className="grid sm:grid-cols-3 gap-3">
+                  {[
+                    { slot: "🔴 Peak", count: "2 trips", when: "7–9:30am, 5–8pm weekdays & Sat evenings" },
+                    { slot: "🟡 Mid-Peak", count: "4 trips", when: "School runs, daytime errands, Sundays" },
+                    { slot: "🟢 Off-Peak", count: "4 trips", when: "Midday, early AM, late evenings" },
+                  ].map((item) => (
+                    <div key={item.slot} className="rounded-xl p-3" style={{ backgroundColor: "rgba(255,255,255,0.04)" }}>
+                      <div className="text-sm font-semibold text-white mb-0.5">{item.slot} <span style={{ color: "#d4a843" }}>{item.count}</span></div>
+                      <div className="text-xs leading-relaxed" style={{ color: "#64748b" }}>{item.when}</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs mt-3" style={{ color: "#475569" }}>Each trip up to 12km. ₹30/km beyond that. Need more? Top-up anytime.</p>
+              </div>
+
+              {/* Feature checklist */}
               <div className="grid sm:grid-cols-3 gap-4 text-left mb-8">
                 {[
-                  { label: "Vetted driver assigned to your society", check: true },
-                  { label: "Book via WhatsApp anytime", check: true },
-                  { label: "No surge pricing, ever", check: true },
-                  { label: "Covers entire family", check: true },
-                  { label: "Cancel anytime", check: true },
-                  { label: "Full post-launch price: ₹5,000/month", check: true },
+                  { label: "Vetted driver assigned to your society" },
+                  { label: "Book via WhatsApp — no app needed" },
+                  { label: "No surge pricing, ever" },
+                  { label: "Covers entire family" },
+                  { label: "Cancel anytime" },
+                  { label: "Full post-launch price: ₹5,000/month" },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-2">
-                    <span style={{ color: item.check ? "#d4a843" : "#475569" }} className="shrink-0 mt-0.5">
-                      {item.check ? "✓" : "○"}
-                    </span>
-                    <span className="text-sm" style={{ color: item.check ? "#e2e8f0" : "#475569" }}>
-                      {item.label}
-                    </span>
+                    <span style={{ color: "#d4a843" }} className="shrink-0 mt-0.5">✓</span>
+                    <span className="text-sm" style={{ color: "#e2e8f0" }}>{item.label}</span>
                   </div>
                 ))}
               </div>
 
               <p className="text-xs" style={{ color: "#475569" }}>
-                Final pricing will be confirmed at launch. Early members get locked-in founder rates.
+                Founding member rate locked for 3 months. Regular price ₹5,000/month applies thereafter.
               </p>
             </div>
           </div>
