@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xvgaepzl"; // placeholder — swap for real endpoint
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzdkjwvr"; // placeholder — swap for real endpoint
 
 export default function Home() {
   const [email, setEmail] = useState("");
