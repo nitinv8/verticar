@@ -264,9 +264,17 @@ export default function Home() {
               style={{ background: "radial-gradient(ellipse at top center, #d4a843, transparent 60%)" }}
             />
             <div className="relative">
-              <div className="text-5xl sm:text-6xl font-bold mb-2" style={{ color: "#d4a843" }}>
-                ₹3,500
-                <span className="text-2xl font-medium text-white">/month</span>
+              <div className="flex flex-col items-center justify-center mb-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-xl font-medium line-through" style={{ color: "#64748b" }}>₹5,000</span>
+                  <div className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide" style={{ backgroundColor: "rgba(212,168,67,0.15)", color: "#d4a843", border: "1px solid rgba(212,168,67,0.3)" }}>
+                    3 Months Pre-launch Offer
+                  </div>
+                </div>
+                <div className="text-5xl sm:text-6xl font-bold" style={{ color: "#d4a843" }}>
+                  ₹3,333
+                  <span className="text-2xl font-medium text-white">/month</span>
+                </div>
               </div>
               <p className="text-base mb-8" style={{ color: "#94a3b8" }}>
                 Base membership. Pay per ride beyond your plan.
@@ -279,7 +287,7 @@ export default function Home() {
                   { label: "No surge pricing, ever", check: true },
                   { label: "Covers entire family", check: true },
                   { label: "Cancel anytime", check: true },
-                  { label: "Full pricing at launch", check: false, note: "Coming soon" },
+                  { label: "Full post-launch price: ₹5,000/month", check: true },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-2">
                     <span style={{ color: item.check ? "#d4a843" : "#475569" }} className="shrink-0 mt-0.5">
