@@ -248,6 +248,146 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── COMPARISON TABLE ─── */}
+      <section className="py-20 px-6" style={{ backgroundColor: "#0a0f1e" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-14">
+            <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: "#d4a843" }}>How We Compare</p>
+            <h2 className="text-3xl sm:text-4xl font-bold">VertiCar vs the alternatives.</h2>
+            <p className="mt-4 text-base" style={{ color: "#64748b" }}>Every option has trade-offs. Here&apos;s the honest picture.</p>
+          </div>
+
+          {/* Table wrapper — horizontal scroll on mobile */}
+          <div className="overflow-x-auto rounded-2xl" style={{ border: "1px solid rgba(212,168,67,0.2)" }}>
+            <table className="w-full min-w-[640px] border-collapse text-sm">
+              <thead>
+                <tr style={{ backgroundColor: "#111827", borderBottom: "1px solid rgba(212,168,67,0.15)" }}>
+                  <th className="text-left px-5 py-4 font-semibold w-48" style={{ color: "#94a3b8" }}>
+                    What matters
+                  </th>
+                  {/* VertiCar column — highlighted */}
+                  <th className="px-5 py-4 text-center font-bold relative" style={{ backgroundColor: "rgba(212,168,67,0.1)", color: "#d4a843", borderLeft: "1px solid rgba(212,168,67,0.25)", borderRight: "1px solid rgba(212,168,67,0.25)" }}>
+                    <div className="flex flex-col items-center gap-1">
+                      <span className="text-base">VertiCar</span>
+                      <span className="text-xs font-medium px-2 py-0.5 rounded-full" style={{ backgroundColor: "rgba(212,168,67,0.2)", color: "#d4a843" }}>← You&apos;re here</span>
+                    </div>
+                  </th>
+                  <th className="px-5 py-4 text-center font-semibold" style={{ color: "#94a3b8", borderLeft: "1px solid rgba(255,255,255,0.05)" }}>Own Car</th>
+                  <th className="px-5 py-4 text-center font-semibold" style={{ color: "#94a3b8", borderLeft: "1px solid rgba(255,255,255,0.05)" }}>Ola / Uber</th>
+                  <th className="px-5 py-4 text-center font-semibold" style={{ color: "#94a3b8", borderLeft: "1px solid rgba(255,255,255,0.05)" }}>Rental Service</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    label: "Monthly cost",
+                    verticar: "₹3,333–5,000",
+                    car: "₹18,000–35,000+",
+                    cab: "₹10,000–15,000+",
+                    rental: "₹20,000–35,000",
+                    carNote: "EMI + fuel + driver + parking + maintenance",
+                    cabNote: "Daily rides + surge + peak-hour multipliers",
+                    rentalNote: "Dedicated car + driver, no shared savings",
+                  },
+                  {
+                    label: "Surge pricing",
+                    verticar: "✅ Never",
+                    car: "✅ N/A",
+                    cab: "❌ Always at peak hours",
+                    rental: "⚠️ Varies by contract",
+                  },
+                  {
+                    label: "Driver you recognise",
+                    verticar: "✅ Same driver, your society",
+                    car: "✅ Your own driver",
+                    cab: "❌ Different stranger every ride",
+                    rental: "⚠️ Usually same, not guaranteed",
+                  },
+                  {
+                    label: "Safe for kids & elders",
+                    verticar: "✅ Society-vetted, trusted",
+                    car: "✅ You manage the driver",
+                    cab: "❌ Unknown background",
+                    rental: "⚠️ Depends on vendor",
+                  },
+                  {
+                    label: "Covers whole family",
+                    verticar: "✅ One membership",
+                    car: "✅ Yes",
+                    cab: "⚠️ Per ride, adds up fast",
+                    rental: "⚠️ Extra cost per trip",
+                  },
+                  {
+                    label: "No app / hassle",
+                    verticar: "✅ WhatsApp only",
+                    car: "✅ Just get in",
+                    cab: "❌ App + wait + cancel risk",
+                    rental: "⚠️ Coordination overhead",
+                  },
+                  {
+                    label: "Parking & maintenance",
+                    verticar: "✅ Not your problem",
+                    car: "❌ Fully your responsibility",
+                    cab: "✅ N/A",
+                    rental: "✅ Handled by vendor",
+                  },
+                  {
+                    label: "Community feel",
+                    verticar: "✅ Know your neighbours",
+                    car: "✅ Solo — your choice",
+                    cab: "❌ Zero",
+                    rental: "❌ Zero",
+                  },
+                ].map((row, i) => (
+                  <tr
+                    key={row.label}
+                    style={{
+                      backgroundColor: i % 2 === 0 ? "#0d1220" : "#0a0f1e",
+                      borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    }}
+                  >
+                    <td className="px-5 py-4 font-medium" style={{ color: "#e2e8f0" }}>
+                      {row.label}
+                    </td>
+                    {/* VertiCar */}
+                    <td
+                      className="px-5 py-4 text-center font-semibold"
+                      style={{
+                        backgroundColor: i % 2 === 0 ? "rgba(212,168,67,0.07)" : "rgba(212,168,67,0.05)",
+                        color: "#d4a843",
+                        borderLeft: "1px solid rgba(212,168,67,0.2)",
+                        borderRight: "1px solid rgba(212,168,67,0.2)",
+                      }}
+                    >
+                      {row.verticar}
+                    </td>
+                    {/* Own Car */}
+                    <td className="px-5 py-4 text-center" style={{ color: "#94a3b8", borderLeft: "1px solid rgba(255,255,255,0.04)" }}>
+                      <span>{row.car}</span>
+                      {row.carNote && <div className="text-xs mt-1" style={{ color: "#475569" }}>{row.carNote}</div>}
+                    </td>
+                    {/* Ola/Uber */}
+                    <td className="px-5 py-4 text-center" style={{ color: "#94a3b8", borderLeft: "1px solid rgba(255,255,255,0.04)" }}>
+                      <span>{row.cab}</span>
+                      {row.cabNote && <div className="text-xs mt-1" style={{ color: "#475569" }}>{row.cabNote}</div>}
+                    </td>
+                    {/* Rental */}
+                    <td className="px-5 py-4 text-center" style={{ color: "#94a3b8", borderLeft: "1px solid rgba(255,255,255,0.04)" }}>
+                      <span>{row.rental}</span>
+                      {row.rentalNote && <div className="text-xs mt-1" style={{ color: "#475569" }}>{row.rentalNote}</div>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-center text-xs mt-5" style={{ color: "#334155" }}>
+            Cost estimates based on typical urban family usage in Gurgaon. Own car cost includes EMI on ₹12L car + fuel + driver + parking.
+          </p>
+        </div>
+      </section>
+
       {/* ─── PRICING ─── */}
       <section className="py-20 px-6" style={{ backgroundColor: "#0a0f1e" }}>
         <div className="max-w-3xl mx-auto text-center">
